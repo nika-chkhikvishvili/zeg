@@ -15,9 +15,10 @@ This module spins ups aws ec2 instance with single manifest and does:
 
 ## puppet
 
-Requrements:
-puppet master.
-puppetlabs-aws module.
+### Requrements:
+
+* puppet master.
+* puppetlabs-aws module.
 
 Follwoning information is required for ec2 instance provisioning:
 
@@ -31,27 +32,29 @@ $ cat /etc/puppetlabs/puppet/puppetlabs_aws_credentials.ini
   region = <REGION> #eg: us-east-1a
 ```
 2. puppet master FQDN for cloud inject.
-
+```shell
 cat templates/inject.erb
 PUPPET_MASTER='<FQDN>'
-
+```
 3. ssh key-pair name in aws 
+```shell
 cat manifests/deploy_aws_instance.pp
 key_name          => '<KEY-NAME>',
+```
 
+[deploy_aws_instance.pp](https://github.com/nika-chkhikvishvili/zeg/manifests/deploy_aws_instance.pp) creates VPC, Security Group, Subnet, Internet Gateway, Rout Table and EC2 Free Tries instance.
 
+#### Usage:
 
-deploy_aws_instance.pp creates VPC, Security Group, Subnet, Internet Gateway, Rout Table and EC2 Free Tries instance.
-
-usage:
-
-1. deplow Amazon AWS EC2 instance
- puppet apply deploy_aws_instance.pp  --noop
-2. wait while instance spins up.
-3. sign new node certificate 
-    puppetserver ca sign  --all
-
-This should be a fairly short description helps the user decide if your module is what they want.
+1. Deplow Amazon AWS EC2 instance:
+```shell
+$ puppet apply deploy_aws_instance.pp  --noop
+```
+2. Wait while instance spins up...
+3. Sign new node certificate:
+```shell
+$ puppetserver ca sign  --all
+```
 
 ## Setup
 
