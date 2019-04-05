@@ -1,0 +1,17 @@
+[Unit]
+Description=Python Scraper daemon for https://www.cryptocompare.com/
+After=network-online.target
+
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/
+ExecStart=/opt/scraper.py
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+
