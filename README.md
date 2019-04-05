@@ -5,15 +5,50 @@ This module spins ups aws ec2 instance with single manifest and does:
 
 #### following magic:
 
-1. [1.Sets up Prometheus for data storage](#prometheus)
-2. [2.Setup Grafana as a front-end for Prometheus](grafana)
-3. [Every XX minutes, scrapes and stores "Price" value for each item in the list of the first 10 items, on that web page https://www.cryptocompare.com](#scrape)
-4. [Each item has own panel/graph showing appropriate data in Grafana](#dashboard)
-5. [Fires alert if value changes for $10 (up or down) for the last 1h](alert)
+1. [All below steps are provisioned, on a single server, by Puppet - configuration management system](#puppet)
+2. [Running Linux server OS (e.g. CentOS 7)](os)
+3. [Sets up Prometheus for data storage](#prometheus)
+4. [Setup Grafana as a front-end for Prometheus](grafana)
+5. [Every XX minutes, scrapes and stores "Price" value for each item in the list of the first 10 items, on that web page https://www.cryptocompare.com](#scrape)
+6. [Each item has own panel/graph showing appropriate data in Grafana](#dashboard)
+7. [Fires alert if value changes for $10 (up or down) for the last 1h](alert)
 
-## prometheus
+## puppet
 
-Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
+Requrements:
+puppet master.
+puppetlabs-aws module.
+
+Follwoning information is required for ec2 instance provisioning:
+
+1. AWS credentials:
+$ cat /etc/puppetlabs/puppet/puppetlabs_aws_credentials.ini 
+
+[default]
+aws_access_key_id = <KEY-ID>
+aws_secret_access_key = <ACCESS-KEY>
+region = <REGION> #eg: us-east-1a
+
+2. puppet master FQDN for cloud inject.
+
+cat templates/inject.erb
+PUPPET_MASTER='<FQDN>'
+
+3. ssh key-pair name in aws 
+cat manifests/deploy_aws_instance.pp
+key_name          => '<KEY-NAME>',
+
+
+
+deploy_aws_instance.pp creates VPC, Security Group, Subnet, Internet Gateway, Rout Table and EC2 Free Tries instance.
+
+usage:
+
+1. deplow Amazon AWS EC2 instance
+ puppet apply deploy_aws_instance.pp  --noop
+2. wait while instance spins up.
+3. sign new node certificate 
+    puppetserver ca sign  --all
 
 This should be a fairly short description helps the user decide if your module is what they want.
 
