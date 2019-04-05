@@ -98,8 +98,10 @@ Here is dashboards what looks like:
 
 
 ## Alerts
+Fires Alert if Coin value changes for $10 (up or down) for the last 1h.
 
-Used PromQL queries: 
+Alerts are created using PromQL queries: 
+
 ```regex
 alert: btc:min5m
 expr: (max_over_time(btc[1h]))
