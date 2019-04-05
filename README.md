@@ -48,13 +48,22 @@ key_name          => '<KEY-NAME>',
 
 1. Deplow Amazon AWS EC2 instance:
 ```shell
-$ puppet apply deploy_aws_instance.pp  --noop
+$ puppet apply manifests/deploy_aws_instance.pp  --noop
 ```
 2. Wait while instance spins up...
 3. Sign new node certificate:
 ```shell
 $ puppetserver ca sign  --all
 ```
+4. Wait while client pulls changes and done! or if you cant wait:
+```shell
+[client-host]$ puppet agent -t
+```
+5. navigate: new instance URL in browser: http://ec2-X-XX-XX-XX.compute-1.amazonaws.com:3000/ 
+
+user: admin
+pass: zgroup
+
 
 ## OS
 
