@@ -1,22 +1,17 @@
 
 # puppet ZEG module
 
-This module spins ups aws ec2 instance with single manifest and does following magic:
-
-
+This module spins ups aws ec2 instance with single manifest and does:
 
 #### following magic:
 
-1. [Description](#description)
-2. [Setup - The basics of getting started with module](#setup)
-    * [What module affects](#what-module-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with module](#beginning-with-module)
-3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
+1. [1.Sets up Prometheus for data storage](#prometheus)
+2. [2.Setup Grafana as a front-end for Prometheus](grafana)
+3. [Every XX minutes, scrapes and stores "Price" value for each item in the list of the first 10 items, on that web page https://www.cryptocompare.com](#scrape)
+4. [Each item has own panel/graph showing appropriate data in Grafana](#dashboard)
+5. [Fires alert if value changes for $10 (up or down) for the last 1h](alert)
 
-## Description
+## prometheus
 
 Briefly tell users why they might want to use your module. Explain what your module does and what kind of problems users can solve with it.
 
