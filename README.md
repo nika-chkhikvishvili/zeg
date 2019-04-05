@@ -22,13 +22,14 @@ puppetlabs-aws module.
 Follwoning information is required for ec2 instance provisioning:
 
 1. AWS credentials:
+```shell
 $ cat /etc/puppetlabs/puppet/puppetlabs_aws_credentials.ini 
 
-[default]
-aws_access_key_id = <KEY-ID>
-aws_secret_access_key = <ACCESS-KEY>
-region = <REGION> #eg: us-east-1a
-
+  [default]
+  aws_access_key_id = <KEY-ID>
+  aws_secret_access_key = <ACCESS-KEY>
+  region = <REGION> #eg: us-east-1a
+```
 2. puppet master FQDN for cloud inject.
 
 cat templates/inject.erb
