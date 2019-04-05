@@ -9,9 +9,9 @@ This module spins ups aws ec2 instance with single manifest and does:
 2. [Running Linux server OS (e.g. CentOS 7)](#OS)
 3. [Sets up Prometheus for data storage](#Prometheus)
 4. [Setup Grafana as a front-end for Prometheus](#Grafana)
-5. [Every XX minutes, scrapes and stores "Price" value for each item in the list of the first 10 items, on that web page https://www.cryptocompare.com](#scrape)
-6. [Each item has own panel/graph showing appropriate data in Grafana](#dashboard)
-7. [Fires alert if value changes for $10 (up or down) for the last 1h](alert)
+5. [Every XX minutes, scrapes and stores "Price" value for each item in the list of the first 10 items, on that web page https://www.cryptocompare.com](#Scraper)
+6. [Each item has own panel/graph showing appropriate data in Grafana](#Dashboards)
+7. [Fires alert if value changes for $10 (up or down) for the last 1h](Alert)
 
 ## puppet
 
@@ -94,4 +94,16 @@ Nothing special, prepeares OS for with basic configurations: installs neccesary 
 
 Here is dashboards what looks like:
 ![grafana dshboard](https://raw.githubusercontent.com/nika-chkhikvishvili/zeg/master/files/grafana-dashboard.png)
+![prometeus alert](https://raw.githubusercontent.com/nika-chkhikvishvili/zeg/master/files/prometeus-alert.png)
+
+
+## Alerts
+
+Used PromQL queries: 
+```regex
+alert: btc:min5m
+expr: (max_over_time(btc[1h]))
+  - (min_over_time(btc[1h])) > 10
+for: 10s
+```
 
