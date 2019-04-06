@@ -17,10 +17,6 @@ ec2_securitygroup { 'zeg-sg':
     cidr     => '0.0.0.0/0'
   },{
     protocol => 'tcp',
-    port     => 8080,
-    cidr     => '0.0.0.0/0'
-  },{
-    protocol => 'tcp',
     port     => 9090,
     cidr     => '0.0.0.0/0',
     description => 'prometeus'
