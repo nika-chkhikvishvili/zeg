@@ -110,7 +110,7 @@ GEM
       hocon (>= 1.0)
     puppet-strings (2.1.0)
       rgen
-      yard (~> 0.9.5)
+      yard (~> 0.9.20)
     puppet-syntax (2.4.3)
       rake
     puppet_pot_generator (1.0.1)
